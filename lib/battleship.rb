@@ -1,6 +1,11 @@
 require 'pry'
 require 'pry-state'
 require './lib/menu'
+require './lib/computer_placement'
+require './lib/user_placement'
+require './lib/computer_board'
+require './lib/player_board'
+
 
 class Battleship
 
@@ -19,6 +24,8 @@ class Battleship
   def run
     welcome_message
     main_menu
+    ComputerPlacement.new.run
+    UserPlacement.new.run
   end
 
 end

@@ -24,6 +24,7 @@ class UserPlacement
     two_unit_coord_collection = two_unit_placement.split(' ')
     @two_unit_first_coord = two_unit_coord_collection[0]
     @two_unit_second_coord = two_unit_coord_collection[1]
+    verify_acceptable_position
     return two_unit_coord_collection
   end
 
@@ -38,6 +39,91 @@ class UserPlacement
         end
     end
   end
+
+  def verify_acceptable_position
+    if two_unit_first_coord == "A1"
+      if two_unit_second_coord != "A2" && two_unit_second_coord != "B1"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "A2"
+      if two_unit_second_coord != "A1" && two_unit_second_coord != "A3" && two_unit_second_coord != "B2"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "A3"
+      if two_unit_second_coord != "A2" && two_unit_second_coord != "A4" && two_unit_second_coord != "B3"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "A4"
+      if two_unit_second_coord != "A3" && two_unit_second_coord != "B4"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "B1"
+      if two_unit_second_coord != "A1" && two_unit_second_coord != "C1" && two_unit_second_coord != "B2"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "B2"
+      if two_unit_second_coord != "A2" && two_unit_second_coord != "C2" && two_unit_second_coord != "B1" && two_unit_second_coord != "B3"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "B3"
+      if two_unit_second_coord != "A3" && two_unit_second_coord != "C3" && two_unit_second_coord != "B2" && two_unit_second_coord != "B4"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "B4"
+      if two_unit_second_coord != "A4" && two_unit_second_coord != "C4" && two_unit_second_coord != "B3"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "C1"
+      if two_unit_second_coord != "C2" && two_unit_second_coord != "B1" && two_unit_second_coord != "D1"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "C2"
+      if two_unit_second_coord != "C1" && two_unit_second_coord != "C3" && two_unit_second_coord != "B2" && two_unit_second_coord != "D2"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "C3"
+      if two_unit_second_coord != "C4" && two_unit_second_coord != "C2" && two_unit_second_coord != "B3" && two_unit_second_coord != "D3"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "C4"
+      if two_unit_second_coord != "B4" && two_unit_second_coord != "C3" && two_unit_second_coord != "D4"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "D1"
+      if two_unit_second_coord != "D2" && two_unit_second_coord != "C1"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "D2"
+      if two_unit_second_coord != "D1" && two_unit_second_coord != "D3" && two_unit_second_coord != "C2"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "D3"
+      if two_unit_second_coord != "C3" && two_unit_second_coord != "D2" && two_unit_second_coord != "D4"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    elsif two_unit_first_coord == "D4"
+      if two_unit_second_coord != "D3" && two_unit_second_coord != "C4"
+        puts "Sorry the position or size of your ship does not meet the requirements."
+        verify_two_unit_ship_placement
+      end
+    end
+  end
+
 
   def get_three_unit_ship_placement
     puts "Specify your three-unit placement like: 'A1 A3' or 'B2 D2'"
@@ -116,7 +202,7 @@ class UserPlacement
     elsif three_unit_first_coord == "D4" && three_unit_second_coord == "B4"
       @three_unit_mid_coord = "C4"
     else
-      puts "Sorry the position or size of your ship does not work"
+      puts "Sorry the position or size of your ship does not meet the requirements."
       verify_three_unit_ship_placement
     end
   end
@@ -152,13 +238,4 @@ class UserPlacement
     verify_two_unit_ship_placement
     verify_three_unit_ship_placement
   end
-
 end
-
-user_place = UserPlacement.new
-user_place.run
-puts "two_unit_first_coord: #{user_place.two_unit_first_coord}"
-puts "two_unit_second_coord: #{user_place.two_unit_second_coord}"
-puts "three_unit_first_coord: #{user_place.three_unit_first_coord}"
-puts "three_unit_second_coord: #{user_place.three_unit_second_coord}"
-puts "three_unit_mid_coord: #{user_place.three_unit_mid_coord}"

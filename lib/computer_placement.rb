@@ -190,8 +190,3 @@ class ComputerPlacement
   end
 
 end
-
-place = ComputerPlacement.new
-place.run
-puts "Two Unit: [#{place.two_unit_first_coord}] [#{place.two_unit_second_coord}]"
-puts "Three Unit: [#{place.three_unit_first_coord}] [#{place.three_unit_mid_coord}] [#{place.three_unit_second_coord}]"
