@@ -29,10 +29,18 @@ class PlayerBoard
     end
     if verify_coordinate == false
       puts "Sorry the coordinate you entered does not match the coordinates on the grid."
-        self.fire
+        fire#self.fire
     end
-    if target 
-    @already_targeted << target
+    check_for_duplicate = already_targeted.any? do |coord|
+      coord == target
+    end
+    if check_for_duplicate == false
+      @already_targeted << target
+    elsif check_for_duplicate == true
+      puts "Sorry you have already fired upon this target."
+      fire
+    end
+    
     return verify_coordinate
   end
 

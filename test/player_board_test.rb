@@ -35,11 +35,20 @@ class PlayerBoardTest < Minitest::Test
     refute verify_1
   end
 
-  def test_if_already_fired_on_that_coordinate
+  def test_if_already_target_array_gets_target_shoveled
     play = PlayerBoard.new
     target = "A1"
     verify = play.verify_coord(target)
 
     assert play.already_targeted.length > 0
+  end
+
+  def test_if_already_fired_on_that_coordinate
+    play = PlayerBoard.new
+    play.already_targeted = ["A1"]
+    target = "A1"
+    verify = play.verify_coord(target)
+    
+    assert play.already_targeted.length == 1
   end
 end
