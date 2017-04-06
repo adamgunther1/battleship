@@ -10,9 +10,4 @@ class GridTest < Minitest::Test
     assert_instance_of Grid, grid
   end
 
-  
-
-
-
-
 end

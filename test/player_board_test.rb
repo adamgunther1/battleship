@@ -52,21 +52,4 @@ class PlayerBoardTest < Minitest::Test
     assert play.already_targeted.length == 2
   end
 
-  # def test_if_returns_hit_or_miss
-  #   play = PlayerBoard.new
-  #   target = "A1"
-  #   hits_or_misses = play.hit_or_miss(target)
-
-  #   assert_equal "Hit!" || "Miss!", hits_or_misses
-  # end
-
-  def test_if_hit_alters_coordinate_value
-
-  def test_if_changes_coordinate_values_from_coordinate_location_to_hit_or_miss
-#need to have coordinate values populate display grid. Have a gsub of sorts that if != H or M, index value that equals target equals empty string
-  ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", 
-     "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
-  end
-
-
 end

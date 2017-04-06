@@ -24,14 +24,4 @@ class ComputerPlacementTest < Minitest::Test
     assert includes_coord  
   end
 
-  # def test_second_coordinate_assignment
-  #   place = ComputerPlacement.new
-  #   first_coord = "A1"
-  #   if first_coord == "A1"
-  #     possible_coords = ["A2", "B1"]
-  #     second_coord = possible_coords.sample
-  #   end
-    
-  # end
-
 end
