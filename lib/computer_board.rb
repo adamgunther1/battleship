@@ -72,7 +72,7 @@ class ComputerBoard
       p "GAME OVER"
       p "shot-count: #{shot_count}"
       @end_time = Time.now
-      p "game-time: #{@end_time - @start_time}"
+      p "game-time: #{@end_time - @start_time} seconds"
     end
   end
 
