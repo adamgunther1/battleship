@@ -1,13 +1,20 @@
 require 'pry'
 require 'pry-state'
 require './lib/grid'
+require './lib/communication'
 
 class UserPlacement
+  include Communication
   attr_reader :user_grid, :two_unit_first_coord, :two_unit_second_coord,
               :three_unit_first_coord, :three_unit_second_coord, 
               :three_unit_mid_coord
   def initialize
     @user_grid = Grid.new
+    @two_unit_first_coord = two_unit_first_coord
+    @two_unit_second_coord = two_unit_second_coord
+    @three_unit_first_coord = three_unit_first_coord
+    @three_unit_second_coord = three_unit_second_coord
+    @three_unit_mid_coord = three_unit_mid_coord
   end
 
   def prompt_user
@@ -43,87 +50,75 @@ class UserPlacement
   def verify_acceptable_position
     if two_unit_first_coord == "A1"
       if two_unit_second_coord != "A2" && two_unit_second_coord != "B1"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "A2"
       if two_unit_second_coord != "A1" && two_unit_second_coord != "A3" && two_unit_second_coord != "B2"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "A3"
       if two_unit_second_coord != "A2" && two_unit_second_coord != "A4" && two_unit_second_coord != "B3"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "A4"
       if two_unit_second_coord != "A3" && two_unit_second_coord != "B4"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "B1"
       if two_unit_second_coord != "A1" && two_unit_second_coord != "C1" && two_unit_second_coord != "B2"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "B2"
       if two_unit_second_coord != "A2" && two_unit_second_coord != "C2" && two_unit_second_coord != "B1" && two_unit_second_coord != "B3"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "B3"
       if two_unit_second_coord != "A3" && two_unit_second_coord != "C3" && two_unit_second_coord != "B2" && two_unit_second_coord != "B4"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "B4"
       if two_unit_second_coord != "A4" && two_unit_second_coord != "C4" && two_unit_second_coord != "B3"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "C1"
       if two_unit_second_coord != "C2" && two_unit_second_coord != "B1" && two_unit_second_coord != "D1"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "C2"
       if two_unit_second_coord != "C1" && two_unit_second_coord != "C3" && two_unit_second_coord != "B2" && two_unit_second_coord != "D2"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "C3"
       if two_unit_second_coord != "C4" && two_unit_second_coord != "C2" && two_unit_second_coord != "B3" && two_unit_second_coord != "D3"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "C4"
       if two_unit_second_coord != "B4" && two_unit_second_coord != "C3" && two_unit_second_coord != "D4"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "D1"
       if two_unit_second_coord != "D2" && two_unit_second_coord != "C1"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "D2"
       if two_unit_second_coord != "D1" && two_unit_second_coord != "D3" && two_unit_second_coord != "C2"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "D3"
       if two_unit_second_coord != "C3" && two_unit_second_coord != "D2" && two_unit_second_coord != "D4"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     elsif two_unit_first_coord == "D4"
       if two_unit_second_coord != "D3" && two_unit_second_coord != "C4"
-        puts "Sorry the position or size of your ship does not meet the requirements."
-        verify_two_unit_ship_placement
+        invalid
       end
     end
   end
 
+  def invalid
+    coordinates_not_acceptable_message
+      verify_two_unit_ship_placement
+  end
 
   def get_three_unit_ship_placement
     puts "Specify your three-unit placement like: 'A1 A3' or 'B2 D2'"

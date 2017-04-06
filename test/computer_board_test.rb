@@ -5,7 +5,19 @@ require './lib/computer_board'
 class ComputerBoardTest < Minitest::Test
 
   def test_it_exists
-    play = 
+    play = ComputerBoard.new
+
+    assert_instance_of ComputerBoard, play
+  end
+
+  def test_get_firing_target
+    play = ComputerBoard.new
+    target = play.get_firing_target
+    actual_target = play.computer_board.all_coordinate_values.any? do |coord|
+      target == coord
+    end
+
+    assert actual_target
   end
 
 end
