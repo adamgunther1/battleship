@@ -23,6 +23,9 @@ class ComputerBoard
     @shot_count = 0
     @start_time = Time.now
     @end_time = end_time
+    @two_unit_ship_location = [@two_unit_first_coord, @two_unit_second_coord]
+    @three_unit_ship_location = [@three_unit_first_coord, @three_unit_second_coord, @three_unit_mid_coord]
+    add_computer_ship_location
   end
 
   def display_computer_board
@@ -30,9 +33,20 @@ class ComputerBoard
     computer_board.display_grid
   end
 
+  def add_computer_ship_location
+    @two_unit_ship_location.each do |s|
+      i = computer_board.all_coordinate_values.index(s)
+      computer_board.all_coordinate_values[i] = "s "
+    end
+    @three_unit_ship_location.each do |s|
+      i = computer_board.all_coordinate_values.index(s)
+      computer_board.all_coordinate_values[i] = "S "
+    end
+  end
+
   def get_firing_target
-    target = "S"
-    until target != "S" && target != "H" && target != "M"
+    target = "M "
+    until target != "H " && target != "M "
       target = computer_board.all_coordinate_values[rand(16)]
     end
     @shot_count += 1
@@ -41,7 +55,7 @@ class ComputerBoard
   end
 
   def hit_or_miss(target)
-    if target == two_unit_first_coord || target == two_unit_second_coord || target == three_unit_first_coord || target == three_unit_second_coord || target == three_unit_mid_coord
+    if target == "S " || target == "s "
       hit(target)
     else
       miss(target)
@@ -51,14 +65,14 @@ class ComputerBoard
   def hit(target)
     i = computer_board.all_coordinate_values.index(target)
     computer_board.all_coordinate_values[i] = "H "
-    if target == two_unit_first_coord || target == two_unit_second_coord
+    if target == "s "
       @two_unit_ship_health -= 1
       if @two_unit_ship_health > 0
         p "Hit your ship!"
       elsif @two_unit_ship_health == 0
         p "Sunk your two-unit ship!"
       end
-    elsif target == three_unit_first_coord || target == three_unit_second_coord || target == three_unit_mid_coord
+    elsif target == "S "
       @three_unit_ship_health -= 1
       if @three_unit_ship_health > 0
         p "Hit your ship!"
