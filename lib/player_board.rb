@@ -28,6 +28,7 @@ class PlayerBoard
   end
 
   def display_player_board
+    p "PLAYER BOARD"
     player_board.display_grid
   end
 
@@ -104,12 +105,14 @@ class PlayerBoard
     player_board.all_coordinate_values[i] = "M"
   end
 
+  def run
+    until play.two_unit_ship_health == 0 && play.three_unit_ship_health == 0
+      play.display_player_board
+      play.get_firing_target
+    end
+  end
+
 end
 
-play = PlayerBoard.new
-until play.two_unit_ship_health == 0 && play.three_unit_ship_health == 0
-  play.display_player_board
-  play.get_firing_target
-end
 
 

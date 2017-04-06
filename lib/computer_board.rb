@@ -28,6 +28,7 @@ class ComputerBoard
   end
 
   def display_computer_board
+    p "COMPUTER BOARD"
     computer_board.display_grid
   end
 
@@ -81,10 +82,12 @@ class ComputerBoard
     i = computer_board.all_coordinate_values.index(target)
     computer_board.all_coordinate_values[i] = "M"
   end
+
+  # def run
+  #   until play.two_unit_ship_health == 0 && play.three_unit_ship_health == 0
+  #     play.display_computer_board
+  #     play.get_firing_target
+  #   end
+  # end
 end
 
-play = ComputerBoard.new
-until play.two_unit_ship_health == 0 && play.three_unit_ship_health == 0
-  play.display_computer_board
-  play.get_firing_target
-end

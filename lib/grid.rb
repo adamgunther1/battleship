@@ -39,6 +39,3 @@ class Grid
   end
 
 end
-
-# grid = Grid.new
-# grid.display_grid

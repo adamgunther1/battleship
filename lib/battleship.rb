@@ -24,10 +24,26 @@ class Battleship
   def run
     welcome_message
     main_menu
-    ComputerPlacement.new.run
-    UserPlacement.new.run
+    setup_turns
+  end
+
+  def setup_turns
+    user = PlayerBoard.new
+    comp = ComputerBoard.new
+    until (comp.two_unit_ship_health == 0 && comp.three_unit_ship_health == 0) || (user.two_unit_ship_health == 0 && user.three_unit_ship_health == 0)
+
+      user.display_player_board
+      user.get_firing_target
+      user.display_player_board
+      p "Hit 'enter' to continue"
+      continue = gets
+      system "clear"
+      comp.get_firing_target
+      comp.display_computer_board
+    end
   end
 
 end
 
 new_game = Battleship.new
+new_game.run

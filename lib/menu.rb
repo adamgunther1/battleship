@@ -40,9 +40,9 @@ class Menu
   def get_instructions_input
     puts "Would you like to (p)lay or (q)uit?"
     instructions_selection = gets.chomp.downcase
-    if menu_selection == "p" || menu_selection == "play"
+    if instructions_selection == "p" || instructions_selection == "play"
       play
-    elsif menu_selection == "q" || menu_selection == "quit"
+    elsif instructions_selection == "q" || instructions_selection == "quit"
       quit
     else
       p "Sorry, did not understand."
