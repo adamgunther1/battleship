@@ -1,5 +1,3 @@
-require 'pry'
-require 'pry-state'
 require './lib/menu'
 require './lib/computer_placement'
 require './lib/user_placement'
@@ -31,11 +29,10 @@ class Battleship
     user = PlayerBoard.new
     comp = ComputerBoard.new
     until (comp.two_unit_ship_health == 0 && comp.three_unit_ship_health == 0) || (user.two_unit_ship_health == 0 && user.three_unit_ship_health == 0)
-
       user.display_player_board
       user.get_firing_target
       user.display_player_board
-      p "Hit 'enter' to continue"
+      p "Hit 'ENTER' to continue"
       continue = gets
       system "clear"
       comp.get_firing_target

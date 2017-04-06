@@ -1,12 +1,8 @@
-require 'pry'
-require 'pry-state'
 require './lib/grid'
-
 
 class ComputerPlacement
   attr_reader :computer_grid, :two_unit_first_coord, :two_unit_second_coord,
-              :three_unit_first_coord, :three_unit_second_coord,
-              :three_unit_mid_coord
+              :three_unit_first_coord, :three_unit_second_coord, :three_unit_mid_coord
   def initialize
     @computer_grid = Grid.new
     @two_unit_first_coord = two_unit_first_coord

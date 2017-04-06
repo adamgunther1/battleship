@@ -1,5 +1,3 @@
-require 'pry'
-require 'pry-state'
 require './lib/computer_placement'
 require './lib/user_placement'
 
@@ -34,7 +32,6 @@ class Menu
     puts "Setup: I will place my ships randomly and you will be prompted to place your ships. Select the starting coordinate and ending coordinate of your ship. For example: a two-unit ship can be placed on 'A1 A2' or 'A2 B2' and a three-unit ship can be placed on 'A1 A3' or 'B2 B4'. You must place your ships horizontally or vertically. They can't wrap around the grid or hand over the grid. Ships can touch but can't be on the same space."
     puts "Interface: The grid will start of blank and every coordinate you choose to attack will either display an 'H' for Hit or 'M' for Miss."
     get_instructions_input
-
   end
 
   def get_instructions_input

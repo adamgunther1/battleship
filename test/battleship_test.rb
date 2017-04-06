@@ -24,6 +24,7 @@ class BattleshipTest < Minitest::Test
 
   def test_player_and_computer_takes_turns
     game = Battleship.new
-    
+
   end
+  
 end

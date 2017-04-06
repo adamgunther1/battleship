@@ -1,13 +1,13 @@
-require 'pry'
-require 'pry-state'
 require './lib/grid'
 require './lib/communication'
 
 class UserPlacement
   include Communication
+
   attr_reader :user_grid, :two_unit_first_coord, :two_unit_second_coord,
               :three_unit_first_coord, :three_unit_second_coord, 
               :three_unit_mid_coord
+
   def initialize
     @user_grid = Grid.new
     @two_unit_first_coord = two_unit_first_coord
@@ -117,7 +117,7 @@ class UserPlacement
 
   def invalid
     coordinates_not_acceptable_message
-      verify_two_unit_ship_placement
+    verify_two_unit_ship_placement
   end
 
   def get_three_unit_ship_placement

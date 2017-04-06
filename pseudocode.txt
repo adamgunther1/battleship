@@ -12,7 +12,7 @@ Players take turn firing
   verify if already fired on that coordinate
   puts if hit or miss - METHOD ASSESS IF HIT OR MISS (?REUSE METHOD IN PLAYER AND COMPUTER)
   if hit - METHOD THAT RUNS IF HIT IS TRUE AND ASSESSES WHICH RESPONSE (?REUSE METHOD IN PLAYER AND COMPUTER)
-    if did not sink - hit enemy ship
+    if did not sink - hit enemy ship - REQUIRES A SHIP HEALTH FOR EACH SHIP, REQUIRES A COUNT OF TOTAL SHIPS STILL LIVE
     if did sink - sunk which ship 
     if player sunk final ship
       output "Congrats"

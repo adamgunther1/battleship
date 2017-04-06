@@ -20,8 +20,4 @@ class ComputerBoardTest < Minitest::Test
     assert actual_target
   end
 
-  
-
-
-
 end

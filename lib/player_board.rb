@@ -1,5 +1,3 @@
-require 'pry'
-require 'pry-state'
 require './lib/grid'
 require './lib/computer_placement'
 
@@ -74,7 +72,7 @@ class PlayerBoard
 
   def hit(target)
     i = player_board.all_coordinate_values.index(target)
-    player_board.all_coordinate_values[i] = "H"
+    player_board.all_coordinate_values[i] = "H "
     if target == two_unit_first_coord || target == two_unit_second_coord
       @two_unit_ship_health -= 1
       if @two_unit_ship_health > 0
@@ -102,7 +100,7 @@ class PlayerBoard
   def miss(target)
     p "Miss!"
     i = player_board.all_coordinate_values.index(target)
-    player_board.all_coordinate_values[i] = "M"
+    player_board.all_coordinate_values[i] = "M "
   end
 
   def run
@@ -113,6 +111,3 @@ class PlayerBoard
   end
 
 end
-
-
-

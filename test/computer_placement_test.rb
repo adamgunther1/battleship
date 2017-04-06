@@ -34,5 +34,4 @@ class ComputerPlacementTest < Minitest::Test
     
   # end
 
-
 end
