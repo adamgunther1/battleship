@@ -161,15 +161,15 @@ class ComputerPlacement
   end
 
   def assure_three_unit_ship_not_on_occupied_coordinate
-    if three_unit_first_coord == two_unit_first_coord || two_unit_second_coord
+    if three_unit_first_coord == two_unit_first_coord || three_unit_first_coord == two_unit_second_coord
       three_unit_ship_first_coord
       three_unit_ship_second_coord
       three_unit_ship_mid_coord
-    elsif three_unit_second_coord == two_unit_first_coord || two_unit_second_coord
+    elsif three_unit_second_coord == two_unit_first_coord || three_unit_second_coord == two_unit_second_coord
       three_unit_ship_first_coord
       three_unit_ship_second_coord
       three_unit_ship_mid_coord
-    elsif three_unit_mid_coord == two_unit_first_coord || two_unit_second_coord
+    elsif three_unit_mid_coord == two_unit_first_coord || three_unit_mid_coord == two_unit_second_coord
       three_unit_ship_first_coord
       three_unit_ship_second_coord
       three_unit_ship_mid_coord

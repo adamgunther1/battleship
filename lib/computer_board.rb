@@ -72,6 +72,7 @@ class ComputerBoard
       p "shot-count: #{shot_count}"
       @end_time = Time.now
       p "game-time: #{@end_time - @start_time} seconds"
+      abort
     end
   end
 
