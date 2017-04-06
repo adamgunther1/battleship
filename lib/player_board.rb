@@ -43,7 +43,6 @@ class PlayerBoard
   end
 
   def verify_coord(target)
-    binding.pry
     verify_coordinate = player_board.coordinate_values_duplicate_check.to_a.any? do |index|
       target == index
     end
@@ -56,7 +55,6 @@ class PlayerBoard
     end
     if check_for_duplicate == false
       @already_targeted << target
-      binding.pry
     elsif check_for_duplicate == true
       puts "Sorry you have already fired upon this target."
       return
@@ -96,7 +94,7 @@ class PlayerBoard
       p "Congratulations!!!"
       p "shot-count: #{shot_count}"
       @end_time = Time.now
-      p "game-time: #{@end_time} - #{@start_time}"
+      p "game-time: #{@end_time - @start_time} seconds"
     end
   end
 

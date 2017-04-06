@@ -13,11 +13,15 @@ class ComputerBoardTest < Minitest::Test
   def test_get_firing_target
     play = ComputerBoard.new
     target = play.get_firing_target
-    actual_target = play.computer_board.all_coordinate_values.any? do |coord|
+    actual_target = play.computer_board.coordinate_values_duplicate_check.any? do |coord|
       target == coord
     end
 
     assert actual_target
   end
+
+  
+
+
 
 end
