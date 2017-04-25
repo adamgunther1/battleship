@@ -1,7 +1,10 @@
 require './lib/grid'
 require './lib/user_placement'
+require './lib/communication'
 
 class ComputerBoard
+  include Communication
+
   attr_reader :user_placement, :two_unit_first_coord, :two_unit_second_coord,
                :three_unit_first_coord, :three_unit_second_coord, :three_unit_mid_coord,
                :start_time, :end_time
@@ -29,7 +32,7 @@ class ComputerBoard
   end
 
   def display_computer_board
-    p "COMPUTER BOARD"
+    display_computer_board_title
     computer_board.display_grid
   end
 
@@ -68,21 +71,20 @@ class ComputerBoard
     if target == "s "
       @two_unit_ship_health -= 1
       if @two_unit_ship_health > 0
-        p "Hit your ship!"
+        prompt_hit_player_ship_message
       elsif @two_unit_ship_health == 0
-        p "Sunk your two-unit ship!"
+        prompt_computer_sunk_players_two_unit_ship
       end
     elsif target == "S "
       @three_unit_ship_health -= 1
       if @three_unit_ship_health > 0
-        p "Hit your ship!"
+        prompt_hit_player_ship_message
       elsif @three_unit_ship_health == 0
-        p "Sunk your three-unit ship!"
+        prompt_computer_sunk_players_three_unit_ship
       end
     end
     if @two_unit_ship_health == 0 && @three_unit_ship_health == 0
-      p "I sunk your final ship!"
-      p "GAME OVER"
+      prompt_player_loses_message
       p "shot-count: #{shot_count}"
       @end_time = Time.now
       p "game-time: #{@end_time - @start_time} seconds"
@@ -91,7 +93,7 @@ class ComputerBoard
   end
 
   def miss(target)
-    p "Miss!"
+    prompt_missed_target
     i = computer_board.all_coordinate_values.index(target)
     computer_board.all_coordinate_values[i] = "M "
   end

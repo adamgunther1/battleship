@@ -1,7 +1,10 @@
 require './lib/grid'
 require './lib/computer_placement'
+require './lib/communication'
 
 class PlayerBoard
+  include Communication
+  
   attr_reader :computer_placement, :two_unit_first_coord, :two_unit_second_coord,
                :three_unit_first_coord, :three_unit_second_coord, :three_unit_mid_coord,
                :start_time, :end_time
@@ -26,12 +29,12 @@ class PlayerBoard
   end
 
   def display_player_board
-    p "PLAYER BOARD"
+    display_player_board_title
     player_board.display_grid
   end
 
   def fire
-    p "Fire your shot by entering a coordinate you have not fired upon, i.e. 'A1'"
+    prompt_player_move
   end
 
   def get_firing_target
@@ -46,7 +49,7 @@ class PlayerBoard
       target == index
     end
     if verify_coordinate == false
-      puts "Sorry the coordinate you entered does not match the coordinates on the grid."
+      prompt_incorrect_coordinates
       return
     end
     check_for_duplicate = already_targeted.any? do |coord|
@@ -55,7 +58,7 @@ class PlayerBoard
     if check_for_duplicate == false
       @already_targeted << target
     elsif check_for_duplicate == true
-      puts "Sorry you have already fired upon this target."
+      prompt_already_fired_upon_target_message
       return
     end
     hit_or_miss(target)
@@ -76,21 +79,20 @@ class PlayerBoard
     if target == two_unit_first_coord || target == two_unit_second_coord
       @two_unit_ship_health -= 1
       if @two_unit_ship_health > 0
-        p "Hit enemy ship!"
+        prompt_hit_enemy_ship_message
       elsif @two_unit_ship_health == 0
-        p "Sunk my two-unit ship!"
+        prompt_computer_message_to_player_sunk_two_unit_ship
       end
     elsif target == three_unit_first_coord || target == three_unit_second_coord || target == three_unit_mid_coord
       @three_unit_ship_health -= 1
       if @three_unit_ship_health > 0
-        p "Hit enemy ship!"
+        prompt_hit_enemy_ship_message
       elsif @three_unit_ship_health == 0
-        p "Sunk my three-unit ship!"
+        prompt_computer_message_to_player_sunk_three_unit_ship
       end
     end
     if @two_unit_ship_health == 0 && @three_unit_ship_health == 0
-      p "You sunk my final ship!"
-      p "Congratulations!!!"
+      prompt_player_wins_message
       p "shot-count: #{shot_count}"
       @end_time = Time.now
       p "game-time: #{@end_time - @start_time} seconds"
@@ -99,7 +101,7 @@ class PlayerBoard
   end
 
   def miss(target)
-    p "Miss!"
+    prompt_missed_target
     i = player_board.all_coordinate_values.index(target)
     player_board.all_coordinate_values[i] = "M "
   end

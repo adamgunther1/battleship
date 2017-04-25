@@ -1,3 +1,6 @@
+##REMOVE EDGE CASE OF USER INPUT AS A1A2 INSTEAD OF A1 A2
+
+
 require './lib/grid'
 require './lib/communication'
 
@@ -17,16 +20,18 @@ class UserPlacement
     @three_unit_mid_coord = three_unit_mid_coord
   end
 
+  def run
+    prompt_user
+    verify_two_unit_ship_placement
+    verify_three_unit_ship_placement
+  end
+
   def prompt_user
-    puts "I have laid out my ships on the grid."
-    puts "You now need to layout your two ships."
-    puts "The first is two units long and the second is three units long."
-    puts "The grid has A1 at the top left and D4 at the bottom right."
+    prompt_user_two_ship_placement
   end
 
   def get_two_unit_ship_placement
-    puts "Specify your two-unit placement like: 'A1 A2' or 'B3 C3'"
-    puts "Enter the squares for the two-unit ship:"
+    prompt_to_get_two_unit_ship_placement
     two_unit_placement = gets.chomp.upcase
     two_unit_coord_collection = two_unit_placement.split(' ')
     @two_unit_first_coord = two_unit_coord_collection[0]
@@ -41,7 +46,7 @@ class UserPlacement
           word == index
         end
         if verify_coordinate_in_grid == false
-          puts "Sorry the coordinates do not match the coordinates on the grid."
+          prompt_incorrect_coordinates
           self.verify_two_unit_ship_placement
         end
     end
@@ -121,8 +126,7 @@ class UserPlacement
   end
 
   def get_three_unit_ship_placement
-    puts "Specify your three-unit placement like: 'A1 A3' or 'B2 D2'"
-    puts "Enter the squares for the three-unit ship:"
+    prompt_to_get_three_unit_ship_placement
     three_unit_placement = gets.chomp.upcase
     three_unit_coord_collection = three_unit_placement.split(' ')
     @three_unit_first_coord = three_unit_coord_collection[0]
@@ -197,7 +201,7 @@ class UserPlacement
     elsif three_unit_first_coord == "D4" && three_unit_second_coord == "B4"
       @three_unit_mid_coord = "C4"
     else
-      puts "Sorry the position or size of your ship does not meet the requirements."
+      prompt_incorrect_ship_placement_or_position
       verify_three_unit_ship_placement
     end
   end
@@ -208,7 +212,7 @@ class UserPlacement
         word
       end
       if verify_coordinate_in_grid == false
-        puts "Sorry the coordinates do not match the coordinates on the grid."
+        prompt_incorrect_coordinates
         verify_three_unit_ship_placement
       end
     end
@@ -217,20 +221,15 @@ class UserPlacement
 
   def assure_three_unit_ship_not_on_occupied_coordinate
     if three_unit_first_coord == two_unit_first_coord || three_unit_first_coord == two_unit_second_coord
-      puts "Sorry the coordinates overlap your two-unit ship"
+      prompt_overlapping_coordinates_error_message
       verify_three_unit_ship_placement
     elsif three_unit_second_coord == two_unit_first_coord || three_unit_second_coord == two_unit_second_coord
-      puts "Sorry the coordinates overlap your two-unit ship"
+      prompt_overlapping_coordinates_error_message
       verify_three_unit_ship_placement
     elsif three_unit_mid_coord == two_unit_first_coord || three_unit_mid_coord == two_unit_second_coord
-      puts "Sorry the coordinates overlap your two-unit ship"
+      prompt_overlapping_coordinates_error_message
       verify_three_unit_ship_placement
     end
   end
 
-  def run
-    prompt_user
-    verify_two_unit_ship_placement
-    verify_three_unit_ship_placement
-  end
 end

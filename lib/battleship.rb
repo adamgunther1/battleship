@@ -1,18 +1,21 @@
+##REMOVE ISSUE WHERE IF WRONG COORDINATE, MOVE IS SKIPPED, ALLOW LOOP FOR REPLAY OF CORRECT COORDINATE
+
 require './lib/menu'
 require './lib/computer_placement'
 require './lib/user_placement'
 require './lib/computer_board'
 require './lib/player_board'
-
+require './lib/communication'
 
 class Battleship
+  include Communication
 
   def initialize
     run
   end
   
   def welcome_message
-    puts "Welcome to BATTLESHIP"
+    display_game_welcome_message
   end
 
   def main_menu
@@ -32,7 +35,7 @@ class Battleship
       user.display_player_board
       user.get_firing_target
       user.display_player_board
-      p "Hit 'ENTER' to continue"
+      prompt_next_turn_action
       continue = gets
       system "clear"
       comp.get_firing_target
