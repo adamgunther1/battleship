@@ -7,7 +7,7 @@ class ComputerPlacementTest < Minitest::Test
   def test_it_exists
     place = ComputerPlacement.new
 
-    assert_instance_of Placement, place
+    assert_instance_of ComputerPlacement, place
   end
 
   def test_first_coordinate_assignment
@@ -24,4 +24,21 @@ class ComputerPlacementTest < Minitest::Test
     assert includes_coord  
   end
 
+  def test_no_overlapping_coordinates
+    9999.times do
+      place = ComputerPlacement.new
+      place.run
+      refute_equal place.two_unit_first_coord, place.two_unit_second_coord
+      refute_equal place.two_unit_first_coord, place.three_unit_first_coord
+      refute_equal place.two_unit_first_coord, place.three_unit_second_coord
+      refute_equal place.two_unit_first_coord, place.three_unit_mid_coord
+
+      refute_equal place.two_unit_second_coord, place.three_unit_first_coord
+      refute_equal place.two_unit_second_coord, place.three_unit_second_coord
+      refute_equal place.two_unit_second_coord, place.three_unit_mid_coord
+
+    end
+
+  end
+  
 end

@@ -1,8 +1,10 @@
+require 'pry'
 require './lib/grid'
 
 class ComputerPlacement
   attr_reader :computer_grid, :two_unit_first_coord, :two_unit_second_coord,
-              :three_unit_first_coord, :three_unit_second_coord, :three_unit_mid_coord
+              :three_unit_first_coord, :three_unit_second_coord, :three_unit_mid_coord,
+              :verification
               
   def initialize
     @computer_grid = Grid.new
@@ -11,6 +13,26 @@ class ComputerPlacement
     @three_unit_first_coord = three_unit_first_coord
     @three_unit_second_coord = three_unit_second_coord
     @three_unit_mid_coord = three_unit_mid_coord
+    @verification = false
+  end
+
+  def run
+    until @verification == true
+      two_unit_ship_runner
+      three_unit_ship_runner
+    end
+  end
+
+  def two_unit_ship_runner
+    two_unit_ship_first_coord
+    two_unit_ship_second_coord
+  end
+
+  def three_unit_ship_runner
+    three_unit_ship_first_coord
+    three_unit_ship_second_coord
+    three_unit_ship_mid_coord
+    assure_three_unit_ship_not_on_occupied_coordinate
   end
 
   def two_unit_ship_first_coord
@@ -162,28 +184,21 @@ class ComputerPlacement
   end
 
   def assure_three_unit_ship_not_on_occupied_coordinate
-    if three_unit_first_coord == two_unit_first_coord || three_unit_first_coord == two_unit_second_coord
-      three_unit_ship_first_coord
-      three_unit_ship_second_coord
-      three_unit_ship_mid_coord
-    elsif three_unit_second_coord == two_unit_first_coord || three_unit_second_coord == two_unit_second_coord
-      three_unit_ship_first_coord
-      three_unit_ship_second_coord
-      three_unit_ship_mid_coord
-    elsif three_unit_mid_coord == two_unit_first_coord || three_unit_mid_coord == two_unit_second_coord
-      three_unit_ship_first_coord
-      three_unit_ship_second_coord
-      three_unit_ship_mid_coord
+    if three_unit_first_coord == two_unit_first_coord
+      verification
+    elsif three_unit_first_coord == two_unit_second_coord
+      verification
+    elsif three_unit_second_coord == two_unit_first_coord
+      verification
+    elsif three_unit_second_coord == two_unit_second_coord
+      verification
+    elsif three_unit_mid_coord == two_unit_first_coord
+      verification
+    elsif three_unit_mid_coord == two_unit_second_coord
+      verification
+    else
+      @verification = true
     end
-  end
-
-  def run
-    two_unit_ship_first_coord
-    two_unit_ship_second_coord
-    three_unit_ship_first_coord
-    three_unit_ship_second_coord
-    three_unit_ship_mid_coord
-    assure_three_unit_ship_not_on_occupied_coordinate
   end
 
 end

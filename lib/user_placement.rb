@@ -230,6 +230,6 @@ class UserPlacement
       prompt_overlapping_coordinates_error_message
       verify_three_unit_ship_placement
     end
-  end
+  end  
 
 end
