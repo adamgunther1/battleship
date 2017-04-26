@@ -21,10 +21,5 @@ class BattleshipTest < Minitest::Test
     instructions = game.main_menu
     assert_equal "Would you like to (p)lay, read the (i)nstructions, or (q)uit?", instructions
   end
-
-  def test_player_and_computer_takes_turns
-    game = Battleship.new
-
-  end
   
 end

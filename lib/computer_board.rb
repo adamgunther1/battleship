@@ -83,6 +83,10 @@ class ComputerBoard
         prompt_computer_sunk_players_three_unit_ship
       end
     end
+    game_over
+  end
+
+  def game_over
     if @two_unit_ship_health == 0 && @three_unit_ship_health == 0
       prompt_player_loses_message
       p "shot-count: #{shot_count}"
