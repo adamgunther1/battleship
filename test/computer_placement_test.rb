@@ -36,9 +36,7 @@ class ComputerPlacementTest < Minitest::Test
       refute_equal place.two_unit_second_coord, place.three_unit_first_coord
       refute_equal place.two_unit_second_coord, place.three_unit_second_coord
       refute_equal place.two_unit_second_coord, place.three_unit_mid_coord
-
     end
-
   end
   
 end

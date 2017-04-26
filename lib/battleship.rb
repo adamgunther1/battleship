@@ -1,5 +1,3 @@
-##REMOVE ISSUE WHERE IF WRONG COORDINATE, MOVE IS SKIPPED, ALLOW LOOP FOR REPLAY OF CORRECT COORDINATE
-
 require './lib/menu'
 require './lib/computer_placement'
 require './lib/user_placement'

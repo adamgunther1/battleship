@@ -1,6 +1,3 @@
-##REMOVE EDGE CASE OF USER INPUT AS A1A2 INSTEAD OF A1 A2
-
-
 require './lib/grid'
 require './lib/communication'
 

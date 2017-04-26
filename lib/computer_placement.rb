@@ -1,4 +1,3 @@
-require 'pry'
 require './lib/grid'
 
 class ComputerPlacement
@@ -17,7 +16,7 @@ class ComputerPlacement
   end
 
   def run
-    until @verification == true
+    until verification
       two_unit_ship_runner
       three_unit_ship_runner
     end

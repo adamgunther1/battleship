@@ -45,6 +45,7 @@ class PlayerBoard
   end
 
   def verify_coord(target)
+    verify_coordinate = false
     verify_coordinate = player_board.coordinate_values_duplicate_check.to_a.any? do |index|
       target == index
     end
@@ -76,6 +77,11 @@ class PlayerBoard
   def hit(target)
     i = player_board.all_coordinate_values.index(target)
     player_board.all_coordinate_values[i] = "H "
+    ship_healtch_calculator(target)
+    game_over
+  end
+
+  def ship_healtch_calculator(target)
     if target == two_unit_first_coord || target == two_unit_second_coord
       @two_unit_ship_health -= 1
       if @two_unit_ship_health > 0
@@ -91,6 +97,9 @@ class PlayerBoard
         prompt_computer_message_to_player_sunk_three_unit_ship
       end
     end
+  end
+
+  def game_over
     if @two_unit_ship_health == 0 && @three_unit_ship_health == 0
       prompt_player_wins_message
       p "shot-count: #{shot_count}"
@@ -104,13 +113,6 @@ class PlayerBoard
     prompt_missed_target
     i = player_board.all_coordinate_values.index(target)
     player_board.all_coordinate_values[i] = "M "
-  end
-
-  def run
-    until play.two_unit_ship_health == 0 && play.three_unit_ship_health == 0
-      play.display_player_board
-      play.get_firing_target
-    end
   end
 
 end
